@@ -1,75 +1,166 @@
+/* =======================
+   ภาษาเริ่มต้น
+======================= */
 let lang = "th";
 
-function setLang(l) {
-  lang = l;
-}
-
-/* เปลี่ยนท่าโกโก้ */
-function setMascot(state) {
-  const mascot = document.getElementById("mascot-pointer");
-  if (!mascot) return;
-
-  if (state === "idle") mascot.src = "cocoa-idle.png";
-  if (state === "point") mascot.src = "cocoa-point.png";
-  if (state === "talk") mascot.src = "cocoa-talk.png";
-  if (state === "sleep") mascot.src = "cocoa-sleep.png";
-}
-
-/* โหลดเสียง */
-window.speechSynthesis.onvoiceschanged = () => {
-  window.speechSynthesis.getVoices();
+/* =======================
+   คำถาม 2 ภาษา
+======================= */
+const questions = {
+  th: {
+    q1: "โกโก้แตกต่างจากช็อกโกแลตอย่างไร",
+    q2: "สารสำคัญทางชีวภาพในโกโก้มีอะไรบ้าง",
+    q3: "โกโก้มีบทบาทอย่างไรต่อระบบเอนไซม์ในร่างกาย",
+    q4: "โกโก้ส่งผลต่อสมองและระบบประสาทอย่างไร",
+    q5: "เหตุใดโกโก้จึงถูกจัดเป็น Functional Food",
+    q6: "กระบวนการแปรรูปโกโก้ส่งผลต่อคุณค่าทางโภชนาการหรือไม่",
+    q7: "ผงโกโก้ธรรมชาติกับโกโก้ดัตช์ต่างกันอย่างไร",
+    q8: "โกโก้มีผลต่อระบบหัวใจและหลอดเลือดอย่างไร",
+    q9: "ของเหลือจากกระบวนการผลิตโกโก้สามารถนำไปใช้ประโยชน์ได้อย่างไร",
+    q10: "โกโก้มีความสำคัญต่อเศรษฐกิจและความยั่งยืนอย่างไร"
+  },
+  en: {
+    q1: "How is cocoa different from chocolate?",
+    q2: "What bioactive compounds are found in cocoa?",
+    q3: "How does cocoa affect enzymes in the body?",
+    q4: "How does cocoa affect the brain and nervous system?",
+    q5: "Why is cocoa considered a functional food?",
+    q6: "Does cocoa processing affect nutritional value?",
+    q7: "What is the difference between natural and Dutch cocoa?",
+    q8: "How does cocoa affect the heart and blood vessels?",
+    q9: "How can cocoa by-products be reused?",
+    q10: "Why is cocoa important for the economy and sustainability?"
+  }
 };
 
-function getThaiVoice() {
-  const voices = window.speechSynthesis.getVoices();
-  return voices.find(v => v.lang === "th-TH") || voices[0];
+/* =======================
+   คำตอบ
+======================= */
+const answers = {
+  th: {
+    q1: "โกโก้คือวัตถุดิบจากเมล็ดคาเคา ส่วนช็อกโกแลตคือผลิตภัณฑ์ที่ผ่านการปรุงแต่ง",
+    q2: "โกโก้อุดมไปด้วยฟลาโวนอยด์ เช่น เอพิแคทีชิน",
+    q3: "โพลีฟีนอลช่วยกระตุ้นเอนไซม์ต้านอนุมูลอิสระ",
+    q4: "ธีโอโบรมีนช่วยกระตุ้นสมองและอารมณ์",
+    q5: "โกโก้เป็น Functional Food เพราะมีสารออกฤทธิ์ทางชีวภาพ",
+    q6: "ความร้อนสูงทำให้สารอาหารบางชนิดลดลง",
+    q7: "แตกต่างกันที่กระบวนการผลิต",
+    q8: "ช่วยลดความเสี่ยงโรคหัวใจ",
+    q9: "นำไปทำปุ๋ยหรือพลังงานชีวมวลได้",
+    q10: "เป็นพืชเศรษฐกิจที่ช่วยความยั่งยืน"
+  },
+  en: {
+    q1: "Cocoa comes from cacao beans, while chocolate is processed.",
+    q2: "Cocoa is rich in flavonoids such as epicatechin.",
+    q3: "Polyphenols activate antioxidant enzymes.",
+    q4: "Theobromine stimulates the brain and mood.",
+    q5: "Cocoa is a functional food due to bioactive compounds.",
+    q6: "High heat reduces nutritional value.",
+    q7: "They differ in processing methods.",
+    q8: "It helps reduce heart disease risk.",
+    q9: "By-products can be reused as fertilizer or biomass.",
+    q10: "Cocoa supports the economy and sustainability."
+  }
+};
+
+/* =======================
+   เปลี่ยนภาษา
+======================= */
+function setLang(l, btn) {
+  lang = l;
+
+  document.querySelectorAll(".lang button")
+    .forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  updateQuestionButtons();
+  document.getElementById("text").innerText =
+    lang === "th" ? "กรุณาเลือกคำถาม" : "Please select a question";
 }
 
-function speakText(text) {
-  window.speechSynthesis.cancel();
-  const parts = text.split(/[,ๆ]| และ | ซึ่ง | เพราะ /);
-
-  parts.forEach(part => {
-    if (part.trim()) {
-      const speech = new SpeechSynthesisUtterance(part.trim());
-      speech.lang = "th-TH";
-      speech.voice = getThaiVoice();
-      speech.rate = 0.85;
-      speech.pitch = 0.95;
-      window.speechSynthesis.speak(speech);
-    }
+/* =======================
+   อัปเดตข้อความปุ่ม
+======================= */
+function updateQuestionButtons() {
+  document.querySelectorAll(".question-grid button").forEach(btn => {
+    btn.innerText = questions[lang][btn.dataset.q];
   });
 }
 
+/* =======================
+   ปุ่ม active
+======================= */
+function setActiveQuestion(btn) {
+  document.querySelectorAll(".question-grid button")
+    .forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+/* =======================
+   ควบคุมโกโก้
+======================= */
+function setMascot(state) {
+  document.getElementById("mascot-pointer").src = `cocoa-${state}.png`;
+}
+
+/* =======================
+   เสียง
+======================= */
+function speakThai(text) {
+  speechSynthesis.cancel();
+  text.split(/[,ๆ]| และ | ซึ่ง | เพราะ /).forEach(t => {
+    if (!t.trim()) return;
+    const u = new SpeechSynthesisUtterance(t.trim());
+    u.lang = "th-TH";
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  });
+}
+
+function speakEnglish(text) {
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US";
+  speechSynthesis.speak(u);
+}
+
+/* =======================
+   ฟังก์ชันหลัก
+======================= */
 function speak(q, event) {
-  let msg = "";
+  const btn = event.target;
+  setActiveQuestion(btn);
 
-  if (q === "q1") msg = "โกโก้ คือ วัตถุดิบหลักที่ได้จากเมล็ดของต้นธีโอโบรมา คาเคา ผ่านกระบวนการหมัก คั่ว และบด";
-  if (q === "q2") msg = "โกโก้อุดมไปด้วยฟลาโวนอยด์ โดยเฉพาะเอพิแคทีชิน และคาเทชิน";
-  if (q === "q3") msg = "สารโพลีฟีนอลในโกโก้ช่วยกระตุ้นการทำงานของเอนไซม์ต้านอนุมูลอิสระ";
-  if (q === "q4") msg = "โกโก้มีสารธีโอโบรมีน ช่วยกระตุ้นสมองและอารมณ์";
-  if (q === "q5") msg = "โกโก้จัดเป็น Functional Food เพราะมีสารออกฤทธิ์ทางชีวภาพ";
-  if (q === "q6") msg = "การแปรรูปที่ใช้ความร้อนสูงทำให้สารฟลาโวนอยด์ลดลง";
-  if (q === "q7") msg = "โกโก้ธรรมชาติกับโกโก้ดัตช์แตกต่างกันที่กระบวนการผลิต";
-  if (q === "q8") msg = "ฟลาโวนอยด์ช่วยลดความเสี่ยงโรคหัวใจ";
-  if (q === "q9") msg = "เปลือกโกโก้นำไปทำปุ๋ยหรือพลังงานชีวมวลได้";
-  if (q === "q10") msg = "โกโก้เป็นพืชเศรษฐกิจที่สำคัญต่อความยั่งยืน";
-
+  const msg = answers[lang][q];
   document.getElementById("text").innerText = msg;
 
-  /* ให้โกโก้ชี้ปุ่ม */
-  const btn = event.target;
-  const rect = btn.getBoundingClientRect();
+  /* ===== วางโกโก้ตรงกลางปุ่ม (วิธีที่ถูกต้อง) ===== */
   const mascot = document.getElementById("mascot-pointer");
+  const rect = btn.getBoundingClientRect();
 
-  mascot.style.top = window.scrollY + rect.top + rect.height / 2 - 40 + "px";
-  mascot.style.left = rect.left - 90 + "px";
+  const centerX =
+    rect.left + rect.width / 2 + window.scrollX;
+  const centerY =
+    rect.top + rect.height / 2 + window.scrollY;
 
+  mascot.style.left =
+    centerX - mascot.offsetWidth / 2 + "px";
+  mascot.style.top =
+    centerY - mascot.offsetHeight / 2 + "px";
+
+  /* ท่า + เสียง */
   setMascot("point");
   setTimeout(() => setMascot("talk"), 200);
-  speakText(msg);
+
+  lang === "th" ? speakThai(msg) : speakEnglish(msg);
+
   setTimeout(() => setMascot("idle"), msg.length * 80);
 }
 
-window.onload = () => setMascot("sleep");
-
+/* =======================
+   เริ่มต้น
+======================= */
+window.onload = () => {
+  setMascot("sleep");
+  updateQuestionButtons();
+};
