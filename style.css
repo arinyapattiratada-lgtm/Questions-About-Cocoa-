@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f5eee6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 360px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #7a4a2e;
+}
+
+p {
+  font-size: 14px;
+  color: #666;
+}
+
+.lang {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.lang button {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #ddd;
+}
+
+button {
+  width: 100%;
+  background: #8b5e3c;
+  color: white;
+  border: none;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #6f452a;
+}
+
+#text {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f1e3d3;
+  border-radius: 12px;
+}
+
+/* กล่องรวมปุ่มคำถาม */
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* แถวละ 2 ปุ่ม */
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* ปุ่มคำถามใน grid */
+.question-grid button {
+  width: 100%;
+  font-size: 13px;
+  padding: 12px;
+  line-height: 1.4;
+}
+
+#mascot-pointer {
+  position: absolute;
+  width: 80px;
+  pointer-events: none;
+  transition: top 0.3s ease, left 0.3s ease, opacity 0.3s ease;
+  z-index: 20;
+}
+

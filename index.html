@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> สื่อดิจิทัลแบบทดสอบให้ความรู้เกี่ยวกับโกโก้ </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ตัวโกโก้ -->
+<img src="cocoa-sleep.png" id="mascot-pointer" alt="cocoa mascot">
+
+    <div class="container">
+        <h1> สื่อดิจิทัลแบบทดสอบให้ความรู้เกี่ยวกับโกโก้ </h1>
+        <p> กดเลือกคำถาม ระบบจะตอบด้วยเสียงอัตโนมัติ </p>
+
+        <div class="lang">
+            <button onclick="setLang('th')">TH</button>
+            <button onclick="setLang('en')">EN</button>
+        </div>
+
+        <div class="question-grid">
+            <button onclick="speak('q1', event)"> โกโก้แตกต่างจากช็อกโกแลตอย่างไร </button>
+            <button onclick="speak('q2', event)"> สารสำคัญทางชีวภาพในโกโก้มีอะไรบ้าง </button>
+            <button onclick="speak('q3', event)"> โกโก้มีบทบาทอย่างไรต่อระบบเอนไซม์ในร่างกาย </button>
+            <button onclick="speak('q4', event)"> โกโก้ส่งผลต่อสมองและระบบประสาทอย่างไร </button>
+            <button onclick="speak('q5', event)"> เหตุใดโกโก้จึงถูกจัดเป็น Functional Food </button>
+            <button onclick="speak('q6', event)"> กระบวนการแปรรูปโกโก้ส่งผลต่อคุณค่าทางโภชนาการหรือไม่ </butto0n>
+            <button onclick="speak('q7', event)"> ผงโกโก้ธรรมชาติกับโกโก้ดัตช์ต่างกันอย่างไร </button>
+            <button onclick="speak('q8', event)"> โกโก้มีผลต่อระบบหัวใจและหลอดเลือดอย่างไร </button>
+            <button onclick="speak('q9', event)"> ของเหลือจากกระบวนการผลิตโกโก้สามารถนำไปใช้ประโยชน์ได้อย่างไร </button>
+            <button onclick="speak('q10', event)"> โกโก้มีความสำคัญต่อเศรษฐกิจและความยั่งยืนอย่างไร </button>
+        </div>
+
+    <p id="text"> กรุณาเลือกคำถาม </p>
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
