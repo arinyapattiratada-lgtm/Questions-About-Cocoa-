@@ -1,132 +1,211 @@
-/* =========================
-   พื้นหลังหลัก
-========================= */
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
   min-height: 100vh;
-  background: #f5eee6; /* ครีมโกโก้ */
+  background: linear-gradient(135deg, #f3e7da, #efe2d3);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  padding: 60px 20px;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* =========================
+/* =======================
    กล่องหลัก
-========================= */
+======================= */
 .container {
-  width: 360px;
+  width: 700px;
+  max-width: 100%;
   background: #ffffff;
-  border-radius: 22px;
-  padding: 24px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  border-radius: 32px;
+  padding: 55px 50px;
   text-align: center;
+  box-shadow: 
+    0 30px 70px rgba(0, 0, 0, 0.12),
+    0 15px 35px rgba(0, 0, 0, 0.05);
   position: relative;
 }
 
-/* =========================
-   หัวข้อ
-========================= */
-h1 {
-  color: #7a4a2e;
-  font-size: 20px;
-  margin-bottom: 6px;
-}
-
-p {
-  font-size: 14px;
-  color: #666;
-  margin: 6px 0;
-}
-
-/* =========================
-   ปุ่มภาษา
-========================= */
-.lang {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 18px 0;
-}
-
-.lang button {
-  padding: 8px 20px;
-  border-radius: 14px;
-  border: 2px solid transparent;
-  background: #e0e0e0;
-  color: #555;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-/* ปุ่มภาษาที่เลือก */
-.lang button.active {
-  background: #8b5e3c; /* โกโก้ */
-  color: #ffffff;
-  border-color: #d6b48c; /* ครีม */
-  box-shadow: 0 4px 10px rgba(139, 94, 60, 0.35);
-}
-
-/* =========================
-   กล่องปุ่มคำถาม
-========================= */
-.question-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 10px;
-}
-
-/* =========================
-   ปุ่มคำถาม
-========================= */
-.question-grid button {
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 6px;
   background: #8b5e3c;
-  color: #ffffff;
-  border: none;
-  border-radius: 16px;
-  padding: 14px;
-  font-size: 13px;
-  line-height: 1.4;
-  cursor: pointer;
-  transition: all 0.25s ease;
+  border-radius: 0 0 12px 12px;
 }
 
-/* hover */
-.question-grid button:hover {
-  background: #6f452a;
-  transform: translateY(-1px);
-}
-
-/* ปุ่มคำถามที่ถูกเลือก */
-.question-grid button.active {
-  background: #4e2e1f;        /* โกโก้เข้ม */
-  border: 2px solid #d6b48c;  /* ครีม */
-  box-shadow: 0 0 0 3px rgba(214, 180, 140, 0.35);
-  transform: scale(1.03);
-}
-
-/* =========================
-   กล่องคำตอบ
-========================= */
-#text {
-  margin-top: 18px;
-  padding: 16px;
-  background: #f1e3d3;
-  border-radius: 16px;
-  font-size: 14px;
-  color: #5a3a25;
+/* =======================
+   หัวข้อ
+======================= */
+h1 {
+  color: #6b3f26;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
   line-height: 1.5;
 }
 
-/* =========================
-   ตัวโกโก้ (Mascot)
-========================= */
-#mascot-pointer {
-  position: absolute;
-  width: 80px;
-  pointer-events: none;
-  transition: top 0.3s ease, left 0.3s ease, opacity 0.3s ease;
-  z-index: 20;
+.subtitle {
+  color: #8a6a55;
+  margin-bottom: 42px;
+  font-size: 15px;
 }
+
+/* =======================
+   Grid คำถาม
+======================= */
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.question-grid button {
+  background: linear-gradient(135deg, #8b5e3c, #7a4a2e);
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 18px;
+  cursor: pointer;
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  transition: all .3s ease;
+  box-shadow: 0 10px 20px rgba(139, 94, 60, .25);
+}
+
+.question-grid button:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 32px rgba(139, 94, 60, .35);
+}
+
+/* =======================
+   การ์ด
+======================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 35px;
+}
+
+.card {
+  background: linear-gradient(145deg, #f7ede2, #f2e3d5);
+  border-radius: 26px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.08);
+  transition: all .35s ease;
+  border: 1px solid rgba(139,94,60,.1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 45px rgba(0,0,0,.12);
+}
+
+/* รูป */
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* หัวข้อการ์ด */
+.card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6b3f26;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ข้อความ */
+.card p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #5a3a25;
+  text-align: center;      /* จัดกลาง */
+  max-width: 85%;          /* จำกัดความกว้างให้ดูสวย */
+  margin: 0 auto;          /* จัดให้อยู่กลางจริง ๆ */
+}
+
+
+/* =======================
+   ปุ่มล่าง
+======================= */
+.button-group {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.button-group button {
+  background: linear-gradient(135deg, #8b5e3c, #6f472b);
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease;
+  box-shadow: 0 10px 25px rgba(139,94,60,.3);
+}
+
+.button-group button:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px rgba(139,94,60,.4);
+}
+
+/* =======================
+   Animation
+======================= */
+.fade-in {
+  animation: fadeIn .6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* =======================
+   Responsive
+======================= */
+@media (max-width: 768px) {
+
+  body {
+    padding: 30px 16px;
+  }
+
+  .container {
+    padding: 36px 24px;
+  }
+
+  .question-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}
+
+

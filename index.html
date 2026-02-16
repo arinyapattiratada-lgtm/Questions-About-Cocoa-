@@ -2,49 +2,55 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
+  <title>สื่อดิจิทัลโกโก้</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>สื่อดิจิทัลแบบทดสอบให้ความรู้เกี่ยวกับโกโก้</title>
+  <meta name="description" content="สื่อดิจิทัลแบบโต้ตอบเกี่ยวกับโกโก้">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- ตัวโกโก้ -->
-  <img src="cocoa-sleep.png" id="mascot-pointer" alt="cocoa mascot">
+<div class="container fade-in">
 
-  <div class="container">
+  <header>
+    <h1>สื่อดิจิทัลแบบโต้ตอบเรื่องโกโก้</h1>
+    <p class="subtitle">เลือกคำถามเพื่อเรียนรู้</p>
+  </header>
 
-    <h1>สื่อดิจิทัลแบบทดสอบให้ความรู้เกี่ยวกับโกโก้</h1>
-    <p>กดเลือกคำถาม ระบบจะตอบด้วยเสียงอัตโนมัติ</p>
-
-    <!-- ปุ่มภาษา -->
-    <div class="lang">
-      <button class="active" onclick="setLang('th', this)">TH</button>
-      <button onclick="setLang('en', this)">EN</button>
-    </div>
-
-    <!-- ปุ่มคำถาม (ไม่ใส่ข้อความไว้ตรงนี้) -->
+  <main>
     <div class="question-grid">
-      <button data-q="q1" onclick="speak('q1', event)"></button>
-      <button data-q="q2" onclick="speak('q2', event)"></button>
-      <button data-q="q3" onclick="speak('q3', event)"></button>
-      <button data-q="q4" onclick="speak('q4', event)"></button>
-      <button data-q="q5" onclick="speak('q5', event)"></button>
-      <button data-q="q6" onclick="speak('q6', event)"></button>
-      <button data-q="q7" onclick="speak('q7', event)"></button>
-      <button data-q="q8" onclick="speak('q8', event)"></button>
-      <button data-q="q9" onclick="speak('q9', event)"></button>
-      <button data-q="q10" onclick="speak('q10', event)"></button>
+      <button data-q="q1"> โกโก้กับช็อกโกแลต<br>แตกต่างกันอย่างไร</button>
+      <button data-q="q2">โกโก้กับคาเคา<br>แตกต่างกันอย่างไร</button>
+      <button data-q="q3">โกโก้มีประโยชน์อย่างไร<br>(แยกตามสารสำคัญ)</button>
+      <button data-q="q4">เหตุใดโกโก้จึงถูกจัดเป็น <br>“Functional Food”</button>
+      <button data-q="q5">การหมักแบบธรรมชาติกับการหมักแบบอัลคาไลน์ต่างกันอย่างไร</button>
+      <button data-q="q6">ผงโกโก้ธรรมชาติกับโกโก้ดัตช์<br>ต่างกันอย่างไร</button>
+      <button data-q="q7">กระบวนการแปรรูปโกโก้ส่งผล<br>ต่อคุณค่าทางโภชนาการอย่างไร</button>
+      <button data-q="q8">ของเหลือจากกระบวนการผลิตโกโก้สามารถนำไปใช้ประโยชน์อย่างไร</button>
+      <button data-q="q9">การปลูกโกโก้สามารถปลูกที่ไหนได้บ้าง</button>
+      <button data-q="q10">โกโก้เหมาะกับแต่ละโรคอย่างไร<br>(ลดความเสี่ยง ไม่ใช่รักษา)</button>
     </div>
+  </main>
+  <br>
+  <footer>
+    <p class="footer-text">© 2026 สื่อการเรียนรู้เรื่องโกโก้</p>
+  </footer>
 
-    <!-- กล่องคำตอบ -->
-    <p id="text">กรุณาเลือกคำถาม</p>
+</div>
 
-  </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".question-grid button");
 
-  <script src="script.js"></script>
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const q = btn.getAttribute("data-q");
+      localStorage.setItem("selectedQuestion", q);
+      window.location.href = "answer.html";
+    });
+  });
+});
+</script>
+
 </body>
 </html>
-
-
-

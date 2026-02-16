@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>คำตอบ | โกโก้</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container fade-in">
+  <h1 id="question"></h1>
+
+  <div id="card-container" class="card-grid"></div>
+
+  <div class="button-group">
+    <button onclick="playVoice()">🔊 ฟังคำอธิบาย</button>
+    <button onclick="goBack()">← กลับ</button>
+  </div>
+</div>
+
+<audio id="voice"></audio>
+
+<script src="script.js"></script>
+<script>
+const q = localStorage.getItem("selectedQuestion");
+const questionEl = document.getElementById("question");
+const cardContainer = document.getElementById("card-container");
+
+if (!q || !data[q]) {
+  questionEl.innerText = "ไม่พบข้อมูล";
+} else {
+  questionEl.innerText = data[q].question;
+
+  data[q].cards.forEach(card => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <img src="img/${card.img}" alt="">
+      <h3>${card.title}</h3>
+      <p>${card.text}</p>
+    `;
+    cardContainer.appendChild(div);
+  });
+}
+
+function playVoice() {
+  const audio = document.getElementById("voice");
+  audio.src = `audio/${q}.mp3`;
+  audio.play();
+}
+
+function goBack() {
+  window.location.href = "index.html";
+}
+</script>
+</body>
+</html>

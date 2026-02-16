@@ -1,166 +1,187 @@
-/* =======================
-   ภาษาเริ่มต้น
-======================= */
-let lang = "th";
+"use strict";
 
-/* =======================
-   คำถาม 2 ภาษา
-======================= */
-const questions = {
-  th: {
-    q1: "โกโก้แตกต่างจากช็อกโกแลตอย่างไร",
-    q2: "สารสำคัญทางชีวภาพในโกโก้มีอะไรบ้าง",
-    q3: "โกโก้มีบทบาทอย่างไรต่อระบบเอนไซม์ในร่างกาย",
-    q4: "โกโก้ส่งผลต่อสมองและระบบประสาทอย่างไร",
-    q5: "เหตุใดโกโก้จึงถูกจัดเป็น Functional Food",
-    q6: "กระบวนการแปรรูปโกโก้ส่งผลต่อคุณค่าทางโภชนาการหรือไม่",
-    q7: "ผงโกโก้ธรรมชาติกับโกโก้ดัตช์ต่างกันอย่างไร",
-    q8: "โกโก้มีผลต่อระบบหัวใจและหลอดเลือดอย่างไร",
-    q9: "ของเหลือจากกระบวนการผลิตโกโก้สามารถนำไปใช้ประโยชน์ได้อย่างไร",
-    q10: "โกโก้มีความสำคัญต่อเศรษฐกิจและความยั่งยืนอย่างไร"
+/* =========================
+   DATA: ข้อมูลคำถามทั้งหมด
+========================= */
+
+const data = {
+  q1: {
+    question: "โกโก้กับช็อกโกแลตแตกต่างกันอย่างไร",
+    cards: [
+      {
+        title: "โกโก้ (Cocoa)",
+        text: "วัตถุดิบที่ได้จากเมล็ดคาเคาซึ่งผ่านกระบวนการหมัก คั่ว และบด โดยยังคงมีสารสำคัญทางชีวภาพจำนวนมาก",
+        img: "q1-1.jpg",
+        audio: "q1-1.mp3"
+      },
+      {
+        title: "ช็อกโกแลต (Chocolate)",
+        text: "ผลิตภัณฑ์ที่นำโกโก้มาแปรรูปเพิ่มเติม โดยผสมกับน้ำตาล ไขมันจากโกโก(Cocoa butter) และอาจมีนมหรือสารปรุงแต่งอื่น",
+        img: "q1-2.jpg",
+        audio: "q1-2.mp3"
+      }
+    ]
   },
-  en: {
-    q1: "How is cocoa different from chocolate?",
-    q2: "What bioactive compounds are found in cocoa?",
-    q3: "How does cocoa affect enzymes in the body?",
-    q4: "How does cocoa affect the brain and nervous system?",
-    q5: "Why is cocoa considered a functional food?",
-    q6: "Does cocoa processing affect nutritional value?",
-    q7: "What is the difference between natural and Dutch cocoa?",
-    q8: "How does cocoa affect the heart and blood vessels?",
-    q9: "How can cocoa by-products be reused?",
-    q10: "Why is cocoa important for the economy and sustainability?"
+
+  q2: {
+    question: "โกโก้กับคาเคาแตกต่างกันอย่างไร",
+    cards: [
+      {
+        title: "คาเคา (Cacao)",
+        text: "พืชหรือเมล็ดคาเคาในสภาพดิบหรือผ่านกระบวนการน้อยมาก (วัตถุดิบดั้งเดิม)",
+        img: "q2-1.png",
+        audio: "q2-1.mp3"
+      },
+      {
+        title: "โกโก้ (Cocoa)",
+        text: "ผลิตภัณฑ์จากเมล็ดคาเคาที่ผ่านการหมัก คั่ว และแปรรูปแล้ว (ผลลัพธ์จากกระบวนการแปรรูปที่เหมาะสมต่อการบริโภค)",
+        img: "q2-2.jpg",
+        audio: "q2-2.mp3"
+      }
+    ]
+  },
+
+  q3: {
+    question: "โกโก้มีประโยชน์อย่างไร (แยกตามสารสำคัญ)",
+    cards: [
+      {
+        title: "ฟลาโวนอยด์ (Flavonoids)",
+        text: "เป็นสารต้านอนุมูลอิสระ ช่วยลดความเครียดออกซิเดชัน และสนับสนุนการไหลเวียนโลหิต",
+        img: "q3-1.jpg",
+        audio: "q3-1.mp3"
+      },
+      {
+        title: "Phenylethylamine (PEA)",
+        text: "เป็นสารที่เกี่ยวข้องกับระบบประสาท ช่วยกระตุ้นการหลั่งสารสื่อประสาทที่เกี่ยวข้องกับอารมณ์มีส่วนช่วยให้รู้สึกผ่อนคลายและอารมณ์ดี",
+        img: "q3-2.jpg",
+        audio: "q3-2.mp3"
+      },
+      {
+        title: "กรดอะมิโน (Amino Acids)",
+        text: "เป็นองค์ประกอบพื้นฐานของโปรตีนมีบทบาทในการสร้างเอนไซม์ ฮอร์โมน และการซ่อมแซมเซลล์ในร่างกาย",
+        img: "q3-3.png",
+        audio: "q3-3.mp3"
+      }
+    ]
+  },
+
+  q4: {
+    question: "เหตุใดโกโก้จึงถูกจัดเป็น Functional Food",
+    cards: [
+      {
+        title: "Functional Food",
+        text: "โกโก้มีสารออกฤทธิ์ทางชีวภาพตามธรรมชาติ ให้ประโยชน์ต่อสุขภาพมากกว่าการให้พลังงานเพียงอย่างเดียว",
+        img: "q4-1.jpg",
+        audio: "q4-1.mp3"
+      }
+    ]
+  },
+
+  q5: {
+    question: "การหมักแบบธรรมชาติกับการหมักแบบอัลคาไลน์ต่างกันอย่างไร",
+    cards: [
+      {
+        title: "การหมักแบบธรรมชาติ",
+        text: "อาศัยจุลินทรีย์ตามธรรมชาติ ช่วยพัฒนากลิ่นรส และรักษาสารสำคัญได้ดีกว่า",
+        img: "q5-1.jpg",
+        audio: "q5-1.mp3"
+      },
+      {
+        title: "การหมักแบบอัลคาไลน์",
+        text: "ใช้สารด่างลดความเป็นกรด สีเข้มขึ้น รสกลมขึ้น แต่สารต้านอนุมูลอิสระอาจลดลง",
+        img: "q5-2.jpg",
+        audio: "q5-2.mp3"
+      }
+    ]
+  },
+
+  q6: {
+    question: "ผงโกโก้ธรรมชาติกับโกโก้ดัตช์ต่างกันอย่างไร",
+    cards: [
+      {
+        title: "ผงโกโก้ธรรมชาติ",
+        text: "มีความเป็นกรด สีอ่อน และมีฟลาโวนอยด์สูงกว่า",
+        img: "q6-1.jpg",
+        audio: "q6-1.mp3"
+      },
+      {
+        title: "โกโก้ดัตช์ (Dutch Processed Cocoa)",
+        text: "ผ่านการปรับด้วยด่าง สีเข้ม รสอ่อน สารต้านอนุมูลอิสระลดลงบางส่วน",
+        img: "q6-2.jpg",
+        audio: "q6-2.mp3"
+      }
+    ]
+  },
+
+  q7: {
+    question: "กระบวนการแปรรูปโกโก้ส่งผลต่อคุณค่าทางโภชนาการอย่างไร",
+    cards: [
+      {
+        title: "ผลต่อโภชนาการ",
+        text: "กระบวนการที่ใช้ความร้อนสูงหรือการปรับสภาพด้วยด่าง อาจทำให้สารสำคัญ เช่น ฟลาโวนอยด์และโพลีฟีนอล ลดลง อย่างไรก็ตาม การแปรรูปที่เหมาะสมช่วยให้โกโก้ปลอดภัยและบริโภคได้ง่ายขึ้น",
+        img: "q7-1.jpg",
+        audio: "q7-1.mp3"
+      }
+    ]
+  },
+
+  q8: {
+    question: "ของเหลือจากกระบวนการผลิตโกโก้สามารถนำไปใช้ประโยชน์อย่างไร",
+    cards: [
+      {
+        title: "การใช้ประโยชน์",
+        text: "นำไปทำปุ๋ยอินทรีย์ พลังงานชีวมวล อาหารสัตว์ หรือวัสดุชีวภาพ",
+        img: "q8-1.jpg",
+        audio: "q8-1.mp3"
+      }
+    ]
+  },
+
+  q9: {
+    question: "การปลูกโกโก้สามารถปลูกที่ไหนได้บ้าง",
+    cards: [
+      {
+        title: "พื้นที่ปลูกโกโก้",
+        text: "เหมาะกับเขตร้อน อุณหภูมิอบอุ่น ความชื้นสูง ดินร่วนระบายน้ำดี",
+        img: "q9-1.jpg",
+        audio: "q9-1.mp3"
+      }
+    ]
+  },
+
+  q10: {
+    question: "โกโก้เหมาะกับแต่ละโรคอย่างไร (ลดความเสี่ยง ไม่ใช่รักษา)",
+    cards: [
+      {
+        title: "โรคอัลไซเมอร์",
+        text: "ช่วยลดความเครียดออกซิเดชันในเซลล์สมอง และสนับสนุนการไหลเวียนเลือดไปยังสมองจึงอาจมีบทบาทในการ ลดความเสี่ยงของการเสื่อมถอยของการทำงานทางสมอง ",
+        img: "q10-1.jpg",
+        audio: "q10-1.mp3"
+      },
+      {
+        title: "โรคพาร์กินสัน",
+        text: "ช่วยลดความเสียหายของเซลล์ประสาทจากภาวะออกซิเดชัน นอกจากนี้ สารธีโอโบรมีนในโกโก้อาจช่วยสนับสนุนการทำงานของระบบประสาทส่วนกลางการบริโภคโกโก้จึงอาจช่วย ลดความเสี่ยงของความเสื่อมของเซลล์ประสาท",
+        img: "q10-2.jpg",
+        audio: "q10-2.mp3"
+      },
+      {
+        title: "โรคความดันโลหิตสูง",
+        text: "ช่วยให้หลอดเลือดขยายตัวดีขึ้น ส่งผลให้การไหลเวียนของเลือดดีขึ้น และอาจช่วยลดความต้านทานในหลอดเลือด",
+        img: "q10-3.jpg",
+        audio: "q10-3.mp3"
+      },
+      {
+        title: "โรคซึมเศร้า",
+        text: "ช่วยส่งเสริมอารมณ์ ลดความเครียด และลดภาวะอักเสบในระบบประสาท การบริโภคโกโก้ในปริมาณที่เหมาะสมอาจช่วย ลดความเสี่ยงของภาวะซึมเศร้า",
+        img: "q10-4.jpg",
+        audio: "q10-4.mp3"
+      }
+    ]
   }
 };
 
-/* =======================
-   คำตอบ
-======================= */
-const answers = {
-  th: {
-    q1: "โกโก้คือวัตถุดิบจากเมล็ดคาเคา ส่วนช็อกโกแลตคือผลิตภัณฑ์ที่ผ่านการปรุงแต่ง",
-    q2: "โกโก้อุดมไปด้วยฟลาโวนอยด์ เช่น เอพิแคทีชิน",
-    q3: "โพลีฟีนอลช่วยกระตุ้นเอนไซม์ต้านอนุมูลอิสระ",
-    q4: "ธีโอโบรมีนช่วยกระตุ้นสมองและอารมณ์",
-    q5: "โกโก้เป็น Functional Food เพราะมีสารออกฤทธิ์ทางชีวภาพ",
-    q6: "ความร้อนสูงทำให้สารอาหารบางชนิดลดลง",
-    q7: "แตกต่างกันที่กระบวนการผลิต",
-    q8: "ช่วยลดความเสี่ยงโรคหัวใจ",
-    q9: "นำไปทำปุ๋ยหรือพลังงานชีวมวลได้",
-    q10: "เป็นพืชเศรษฐกิจที่ช่วยความยั่งยืน"
-  },
-  en: {
-    q1: "Cocoa comes from cacao beans, while chocolate is processed.",
-    q2: "Cocoa is rich in flavonoids such as epicatechin.",
-    q3: "Polyphenols activate antioxidant enzymes.",
-    q4: "Theobromine stimulates the brain and mood.",
-    q5: "Cocoa is a functional food due to bioactive compounds.",
-    q6: "High heat reduces nutritional value.",
-    q7: "They differ in processing methods.",
-    q8: "It helps reduce heart disease risk.",
-    q9: "By-products can be reused as fertilizer or biomass.",
-    q10: "Cocoa supports the economy and sustainability."
-  }
-};
+/* =========================
+   GLOBAL ACCESS (ถ้าหน้าอื่นเรียกใช้)
+========================= */
 
-/* =======================
-   เปลี่ยนภาษา
-======================= */
-function setLang(l, btn) {
-  lang = l;
-
-  document.querySelectorAll(".lang button")
-    .forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-
-  updateQuestionButtons();
-  document.getElementById("text").innerText =
-    lang === "th" ? "กรุณาเลือกคำถาม" : "Please select a question";
-}
-
-/* =======================
-   อัปเดตข้อความปุ่ม
-======================= */
-function updateQuestionButtons() {
-  document.querySelectorAll(".question-grid button").forEach(btn => {
-    btn.innerText = questions[lang][btn.dataset.q];
-  });
-}
-
-/* =======================
-   ปุ่ม active
-======================= */
-function setActiveQuestion(btn) {
-  document.querySelectorAll(".question-grid button")
-    .forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-}
-
-/* =======================
-   ควบคุมโกโก้
-======================= */
-function setMascot(state) {
-  document.getElementById("mascot-pointer").src = `cocoa-${state}.png`;
-}
-
-/* =======================
-   เสียง
-======================= */
-function speakThai(text) {
-  speechSynthesis.cancel();
-  text.split(/[,ๆ]| และ | ซึ่ง | เพราะ /).forEach(t => {
-    if (!t.trim()) return;
-    const u = new SpeechSynthesisUtterance(t.trim());
-    u.lang = "th-TH";
-    u.rate = 0.85;
-    speechSynthesis.speak(u);
-  });
-}
-
-function speakEnglish(text) {
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "en-US";
-  speechSynthesis.speak(u);
-}
-
-/* =======================
-   ฟังก์ชันหลัก
-======================= */
-function speak(q, event) {
-  const btn = event.target;
-  setActiveQuestion(btn);
-
-  const msg = answers[lang][q];
-  document.getElementById("text").innerText = msg;
-
-  /* ===== วางโกโก้ตรงกลางปุ่ม (วิธีที่ถูกต้อง) ===== */
-  const mascot = document.getElementById("mascot-pointer");
-  const rect = btn.getBoundingClientRect();
-
-  const centerX =
-    rect.left + rect.width / 2 + window.scrollX;
-  const centerY =
-    rect.top + rect.height / 2 + window.scrollY;
-
-  mascot.style.left =
-    centerX - mascot.offsetWidth / 2 + "px";
-  mascot.style.top =
-    centerY - mascot.offsetHeight / 2 + "px";
-
-  /* ท่า + เสียง */
-  setMascot("point");
-  setTimeout(() => setMascot("talk"), 200);
-
-  lang === "th" ? speakThai(msg) : speakEnglish(msg);
-
-  setTimeout(() => setMascot("idle"), msg.length * 80);
-}
-
-/* =======================
-   เริ่มต้น
-======================= */
-window.onload = () => {
-  setMascot("sleep");
-  updateQuestionButtons();
-};
+window.cocoaData = data;
