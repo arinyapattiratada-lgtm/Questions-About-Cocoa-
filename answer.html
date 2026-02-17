@@ -21,10 +21,12 @@
 <audio id="voice"></audio>
 
 <script src="script.js"></script>
+
 <script>
 const q = localStorage.getItem("selectedQuestion");
 const questionEl = document.getElementById("question");
 const cardContainer = document.getElementById("card-container");
+const audioPlayer = document.getElementById("voice");
 
 if (!q || !data[q]) {
   questionEl.innerText = "ไม่พบข้อมูล";
@@ -43,15 +45,35 @@ if (!q || !data[q]) {
   });
 }
 
+/* =========================
+   เล่นเสียงทุกไฟล์ของคำถามนั้นต่อกัน
+========================= */
+
 function playVoice() {
-  const audio = document.getElementById("voice");
-  audio.src = `audio/${q}.mp3`;
-  audio.play();
+  if (!q || !data[q]) return;
+
+  let index = 0;
+  const cards = data[q].cards;
+
+  function playNext() {
+    if (index >= cards.length) return;
+
+    audioPlayer.src = "audio/" + cards[index].audio;
+    audioPlayer.play();
+
+    audioPlayer.onended = () => {
+      index++;
+      playNext();
+    };
+  }
+
+  playNext();
 }
 
 function goBack() {
   window.location.href = "index.html";
 }
 </script>
+
 </body>
 </html>
