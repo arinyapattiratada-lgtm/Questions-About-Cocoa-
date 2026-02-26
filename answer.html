@@ -12,7 +12,7 @@
   <div id="card-container" class="card-grid"></div>
 
   <div class="button-group">
-    <button onclick="playVoice()">🔊 ฟังคำอธิบาย</button>
+    <!-- <button onclick="playVoice()">🔊 ฟังคำอธิบาย</button> -->
     <button onclick="goBack()">← กลับ</button>
   </div>
 </div>
@@ -37,8 +37,10 @@ if (!q || !data[q]) {
     div.className = "card";
     div.innerHTML = `
       <img src="img/${card.img}" alt="">
-      <h3>${card.title}</h3>
-      <p>${card.text}</p>
+      <div class="content">
+        <h3>${card.title}</h3>
+        <p>${card.text}</p>
+      </div>
     `;
     cardContainer.appendChild(div);
   });
@@ -48,26 +50,26 @@ if (!q || !data[q]) {
    เล่นเสียงทุกไฟล์ของคำถามนั้นต่อกัน
 ========================= */
 
-function playVoice() {
-  if (!q || !data[q]) return;
+// function playVoice() {
+//   if (!q || !data[q]) return;
 
-  let index = 0;
-  const cards = data[q].cards;
+//   let index = 0;
+//   const cards = data[q].cards;
 
-  function playNext() {
-    if (index >= cards.length) return;
+//   function playNext() {
+//     if (index >= cards.length) return;
 
-    audioPlayer.src = "audio/" + cards[index].audio;
-    audioPlayer.play();
+//     audioPlayer.src = "audio/" + cards[index].audio;
+//     audioPlayer.play();
 
-    audioPlayer.onended = () => {
-      index++;
-      playNext();
-    };
-  }
+//     audioPlayer.onended = () => {
+//       index++;
+//       playNext();
+//     };
+//   }
 
-  playNext();
-}
+//   playNext();
+// }
 
 function goBack() {
   window.location.href = "index.html";
